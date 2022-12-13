@@ -1,7 +1,9 @@
 {
   "name": "lazy-peon",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
+  "author": "Vue @ Zuluhed-US",
+  "license": "ISC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

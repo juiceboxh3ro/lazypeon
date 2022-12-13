@@ -7,6 +7,25 @@ import { BlizzGuildRoster, GuildRosterMember } from 'app'
 
 import ProfileNotFound from 'components/ProfileNotFound'
 
+const COMPARE = {
+  gt: 'gt',
+  lt: 'lt',
+  exact: 'exact',
+  not: 'not',
+}
+
+const FILTER = {
+  type: 'rank',
+  order: 'desc',
+  compare: 'greater'
+}
+
+const FILTER_VALUES = {
+  rank: '',
+  realm: '',
+  name: '',
+}
+
 interface RouteContext {
   params: {
     guildName: string
@@ -21,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context): Promise<a
   let props = {}
 
   try {
-    let gName = guildName.replaceAll(' ', '-').replaceAll('_', '-')
+    let gName = guildName.replaceAll(' ', '-').replaceAll('_', '-').replaceAll('\'', '')
     const accessToken = await blizzAPI.getAccessToken()
     props = await blizzAPI.query(`/data/wow/guild/${realmSlug}/${gName}/roster?namespace=profile-${locale}&locale=en_US&access_token=${accessToken}`)
   } catch (e) {
@@ -34,44 +53,16 @@ export const getServerSideProps: GetServerSideProps = async (context): Promise<a
 const GuildPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { guild, members } = props as BlizzGuildRoster
   const [sortedMembers, setSortedMembers] = useState<GuildRosterMember[]>(members ?? [])
-  const [sortBy, setSortBy] = useState('rank-desc')
-  const [filterRank, setFilterRank] = useState('')
-  const [filterRealm, setFilterRealm] = useState('')
-  const [filterName, setFilterName] = useState('')
+  const [filter, setFilter] = useState(FILTER)
+  const [filterValues, setFilterValues] = useState(FILTER_VALUES)
   const router = useRouter()
 
   if (!guild?.name) return (<ProfileNotFound />)
 
-  const sortByCharacterName = (order: string) => {
-    const sorted = sortedMembers?.sort((a, b) => {
-      if (a.character.name < b.character.name) return order === 'asc' ? -1 : 1
-      if (a.character.name > b.character.name) return order === 'asc' ? 1 : -1
-      return 0
-    })
-    setSortedMembers(sorted)
-  }
-
-  const sortByRank = (order: string) => {
-    const sorted = sortedMembers?.sort((a, b) => {
-      if (a.rank < b.rank) return order === 'asc' ? -1 : 1
-      if (a.rank > b.rank) return order === 'asc' ? 1 : -1
-      return 0
-    })
-    setSortedMembers(sorted)
-  }
-
-  const sortByRealmSlug = (order: string) => {
-    const sorted = sortedMembers?.sort((a, b) => {
-      if (a.character.realm.slug < b.character.realm.slug) {
-        return order === 'asc' ? -1 : 1
-      }
-      if (a.character.realm.slug > b.character.realm.slug) {
-        return order === 'asc' ? 1 : -1
-      }
-      return 0
-    })
-
-    setSortedMembers(sorted)
+  const resetFilters = () => {
+    setSortedMembers(members)
+    setFilter(FILTER)
+    setFilterValues(FILTER_VALUES)
   }
 
   const filterCharacterName = (name: string) => {
@@ -95,7 +86,7 @@ const GuildPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         <h2 className='text-2xl mb-4'>Filters</h2>
         <div className='border-2 rounded-lg p-4'>
           <div className='flex flex-col items-center gap-4'>
-            <div className='flex gap-4 w-full justify-evenly'>
+            <div className='flex gap-4 w-full justify-evenly items-center'>
               <label htmlFor='filter-rank' className='text-xl'>Rank</label>
               <input
                 id='filter-rank'
@@ -103,86 +94,98 @@ const GuildPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
                 className='px-4 py-2 rounded-md'
                 min='0'
                 max='20'
-                value={filterRank}
-                onChange={(e) => setFilterRank(e.target.value)}
+                value={filterValues.rank}
+                onChange={(e) => setFilterValues({ ...filterValues, rank: e.target.value })}
+              />
+            </div>
+
+            <div className='flex justify-evenly w-full items-center'>
+              <div className='flex items-center'>
+                <input type='radio' name='rank-compare' id='gt' onChange={() => setFilter({ ...filter, compare: COMPARE.gt })} />
+                &nbsp;<label htmlFor='gt'>Greater</label>
+              </div>
+              <div className='flex items-center'>
+                <input type='radio' name='rank-compare' id='lt' onChange={() => setFilter({ ...filter, compare: COMPARE.lt })} />
+                &nbsp;<label htmlFor='lt'>Less</label>
+              </div>
+              <div className='flex items-center'>
+                <input type='radio' name='rank-compare' id='et' onChange={() => setFilter({ ...filter, compare: COMPARE.exact })} />
+                &nbsp;<label htmlFor='et'>Exact</label>
+              </div>
+              <div className='flex items-center'>
+                <input type='radio' name='rank-compare' id='ne' onChange={() => setFilter({ ...filter, compare: COMPARE.not })} />
+                &nbsp;<label htmlFor='ne'>Not</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className='border-2 rounded-lg p-4'>
+          <div className='flex flex-col items-center gap-4'>
+            <div className='flex gap-4 w-full justify-evenly items-center'>
+              <label
+                htmlFor='filter-rank'
+                className='text-xl'
+              >
+                Realm
+              </label>
+              <input
+                id='filter-rank'
+                className='px-4 py-2 rounded-md'
+                value={filterValues.realm}
+                onChange={(e) => setFilterValues({ ...filterValues, realm: e.target.value })}
+              />
+            </div>
+
+            <div className='flex justify-evenly w-full items-center'>
+              <div className='flex items-center'>
+                <input type='radio' name='realm-compare' id='realm-exact' onChange={() => setFilter({ ...filter, compare: COMPARE.exact })} />
+                &nbsp;<label htmlFor='realm-exact'>Exact</label>
+              </div>
+              <div className='flex items-center'>
+                <input type='radio' name='realm-compare' id='realm-not' onChange={() => setFilter({ ...filter, compare: COMPARE.not })} />
+                &nbsp;<label htmlFor='realm-not'>Not</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className='border-2 rounded-lg p-4'>
+          <div className='flex flex-col items-center gap-4'>
+            <div className='flex gap-4 w-full justify-evenly items-center'>
+              <label htmlFor='filter-rank' className='text-xl'>Name</label>
+              <input
+                id='filter-rank'
+                className='px-4 py-2 rounded-md'
+                value={filterValues.name}
+                onChange={(e) => setFilterValues({ ...filterValues, name: e.target.value })}
               />
             </div>
 
             <div className='flex justify-evenly w-full'>
-              <div>
-                <input id='rank-asc' type='radio' name='type' onChange={() => sortByRank('asc')} />&nbsp;<label htmlFor='rank-asc'>Ascending</label>
+              <div className='flex items-center'>
+                <input type='radio' name='name-compare' id='name-exact' onChange={() => setFilter({ ...filter, compare: COMPARE.exact })} />
+                &nbsp;<label htmlFor='name-exact'>Exact</label>
               </div>
-              <div>
-                <input id='rank-desc' type='radio' name='type' onChange={() => sortByRank('desc')}/>&nbsp;<label htmlFor='rank-desc'>Descending</label>
-              </div>
-            </div>
-
-            <div className='flex justify-evenly w-full'>
-              <div>
-                <input type='radio' name='type' id='gt' />&nbsp;<label htmlFor='gt'>Greater</label>
-              </div>
-              <div>
-                <input type='radio' name='type' id='lt' />&nbsp;<label htmlFor='lt'>Less</label>
-              </div>
-              <div>
-                <input type='radio' name='type' id='et' />&nbsp;<label htmlFor='et'>Exact</label>
-              </div>
-              <div>
-                <input type='radio' name='type' id='ne' />&nbsp;<label htmlFor='ne'>Not</label>
+              <div className='flex items-center'>
+                <input type='radio' name='name-compare' id='name-includes' onChange={() => setFilter({ ...filter, compare: COMPARE.not })} />
+                &nbsp;<label htmlFor='name-includes'>Contains</label>
               </div>
             </div>
           </div>
         </div>
 
         <div className='border-2 rounded-lg p-4'>
-          <div className='flex flex-col items-center gap-4'>
-            <div className='flex gap-4 w-full justify-evenly'>
-              <label htmlFor='filter-rank' className='text-xl'>Realm</label>
-              <input id='filter-rank' className='px-4 py-2 rounded-md' />
-            </div>
-
-            <div className='flex justify-evenly w-full'>
-              <div>
-                <input type='radio' name='type' />&nbsp;<label htmlFor='realm-asc'>Ascending</label>
+          <div className="flex flex-col items-center gap-4">
+            <div className='w-full flex justify-evenly items-center'>
+              <h3 className='text-xl'>Order</h3>
+              <div className='flex items-center'>
+                <input type='radio' name='order-by' id='name-asc' onChange={() => setFilter({ ...filter, order: 'asc' })} />
+                &nbsp;<label htmlFor='name-asc'>Ascending</label>
               </div>
-              <div>
-                <input type='radio' name='type' />&nbsp;<label htmlFor='realm-desc'>Descending</label>
-              </div>
-            </div>
-
-            <div className='flex justify-evenly w-full'>
-              <div>
-                <input type='radio' name='type' id='realm-exact' />&nbsp;<label htmlFor='realm-exact'>Exact</label>
-              </div>
-              <div>
-                <input type='radio' name='type' id='realm-not' />&nbsp;<label htmlFor='realm-not'>Not</label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className='border-2 rounded-lg p-4'>
-          <div className='flex flex-col items-center gap-4'>
-            <div className='flex gap-4 w-full justify-evenly'>
-              <label htmlFor='filter-rank' className='text-xl'>Name</label>
-              <input id='filter-rank' className='px-4 py-2 rounded-md' />
-            </div>
-
-            <div className='flex justify-evenly w-full'>
-              <div>
-                <input type='radio' name='type' id='name-asc' />&nbsp;<label htmlFor='name-asc'>Ascending</label>
-              </div>
-              <div>
-                <input type='radio' name='type' id='name-desc' />&nbsp;<label htmlFor='name-desc'>Descending</label>
-              </div>
-            </div>
-
-            <div className='flex justify-evenly w-full'>
-              <div>
-                <input type='radio' name='type' id='name-exact' />&nbsp;<label htmlFor='name-exact'>Exact</label>
-              </div>
-              <div>
-                <input type='radio' name='type' id='name-includes' />&nbsp;<label htmlFor='name-includes'>Contains</label>
+              <div className='flex items-center'>
+                <input type='radio' name='order-by' id='name-desc' onChange={() => setFilter({ ...filter, order: 'desc' })} />
+                &nbsp;<label htmlFor='name-desc'>Descending</label>
               </div>
             </div>
           </div>
@@ -191,11 +194,14 @@ const GuildPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
         <div className='flex justify-end'>
           <button
             className='px-4 py-2 bg-blue-500 rounded-md'
-            onClick={() => setSortedMembers(members)}
+            onClick={resetFilters}
           >
             Reset
           </button>
         </div>
+
+        <p>{JSON.stringify(filter, null, 2)}</p>
+        <p>{JSON.stringify(filterValues, null, 2)}</p>
       </div>
 
       <div className='w-3/4 flex flex-col items-center gap-4 pb-8'>
@@ -204,15 +210,9 @@ const GuildPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
           <table className='w-full'>
             <thead>
               <tr className='text-left text-xl'>
-                <th>
-                  Name
-                </th>
-                <th>
-                  Realm
-                </th>
-                <th>
-                  Rank
-                </th>
+                <th>Name</th>
+                <th>Realm</th>
+                <th>Rank</th>
               </tr>
             </thead>
             <tbody>
