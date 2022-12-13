@@ -1,3 +1,35 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "airbnb", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "linebreak-style": "off",
+    "semi": "off",
+    "import/order": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off",
+    "import/no-unresolved": "off",
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "react/jsx-filename-extension": "off",
+    "import/extensions": "off",
+    "comma-dangle": "off",
+    "object-curly-newline": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "jsx-quotes": "off",
+    "consistent-return": "off",
+    "no-underscore-dangle": "off",
+    "camelcase": "off",
+    "dot-notation": "off",
+    "skipBlankLines": 0,
+    "no-trailing-spaces": [2, { "skipBlankLines": true }],
+    "arrow-body-style": "off",
+    "no-confusing-arrow": "off",
+    "no-restricted-globals": "off",
+    "one-var": "off",
+    "one-var-declaration-per-line": "off",
+    "no-console": ["warn", { "allow": ["info", "warn", "error", "group", "groupCollapsed", "groupEnd", "trace"] }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-control-regex": "off"
+  }
 }
