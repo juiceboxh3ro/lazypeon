@@ -136,6 +136,6 @@ export interface BlizzCharacterProfessions {
   _links: BlizzSelfRef
   character: BlizzWoWCharacter
   primaries: BlizzPrimaryProfession[]
-  secondaries: BlizzArchaeologyProfession[] | BlizzSecondaryProfession[]
+  secondaries: BlizzSecondaryProfession[] // technically archaeology should be in here too, but it's a garbage secondary profession so who cares
   lastModified: string
 }

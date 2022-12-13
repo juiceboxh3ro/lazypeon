@@ -1,5 +1,13 @@
 import mongoose from 'mongoose'
 
+const professionTier = {
+  id: { type: Number, required: true },
+  name: { type: String, required: true },
+  skill_points: Number,
+  max_skill_points: Number,
+  known_recipes: [],
+}
+
 const characterSchema = new mongoose.Schema({
   id: { type: Number, required: true },
   name: { type: String, required: true },
@@ -11,16 +19,28 @@ const characterSchema = new mongoose.Schema({
   professions: {
     primaries: [
       {
-        id: { type: Number, required: true },
-        name: { type: String, required: true },
-        tiers: []
+        profession: {
+          id: { type: Number, required: true },
+          name: { type: String, required: true },
+        },
+        tiers: [
+          {
+            max_skill_points: Number,
+            skill_points: Number,
+            tier: professionTier
+          }
+        ]
       }
     ],
     secondaries: [
       {
-        id: { type: Number, required: true },
-        name: { type: String, required: true },
-        tiers: []
+        profession: {
+          id: { type: Number, required: true },
+          name: { type: String, required: true },
+        },
+        // skill_points: Number, // archaeology only
+        // max_skill_points: Number, // archaeology only
+        // tiers: [professionTier]
       }
     ],
   }

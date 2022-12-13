@@ -55,6 +55,7 @@ const GuildSearch = () => {
             Search
           </button>
         </div>
+        <p className='text-sm'>* Only NA Realms supported currently</p>
       </form>
     </div>
   )
