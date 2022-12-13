@@ -13,12 +13,12 @@ const App = ({ Component, pageProps }: AppProps) => {
           <li>
             <Link href='/guild'>Guild Info</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href='/auction_house'>Auction House</Link>
           </li>
           <li>
             <Link href='/login'>Login</Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
 
