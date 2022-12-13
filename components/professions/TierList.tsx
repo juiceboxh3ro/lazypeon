@@ -25,7 +25,7 @@ const TierList: React.FC<TierListProps> = ({
       <ul className="flex flex-col gap-4">
         {tiers.map((t: PrimaryProfessionTiers) => (
           <>
-            {t.tier.name.toLowerCase().includes(filter)
+            {t.tier.name.toLowerCase().includes(filter.toLowerCase())
             ? (
                 <li
                   key={t.tier.id}
