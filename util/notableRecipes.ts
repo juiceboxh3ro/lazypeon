@@ -17,21 +17,21 @@ const enchanting: INotableRecipe[] = [
         name: 'Homebound Speed',
         source: {
           key: 'Valdrakken Accord',
-          value: 'Reputation 11',
+          value: 'Renown 11',
         },
       },
       {
         name: 'Graceful Avoidance',
         source: {
           key: 'Dragonscale Expedition',
-          value: 'Reputation 9',
+          value: 'Renown 9',
         },
       },
       {
         name: 'Regenerative',
         source: {
           key: 'Iskaara Tuskarr',
-          value: 'Reputation 10',
+          value: 'Renown 10',
         },
       },
     ],
@@ -50,7 +50,7 @@ const enchanting: INotableRecipe[] = [
         name: 'Sustained Strength',
         source: {
           key: 'Maruuk Centaur',
-          value: 'Reputation 8',
+          value: 'Renown 8',
         }
       },
       {
@@ -64,7 +64,7 @@ const enchanting: INotableRecipe[] = [
         name: 'Accelerated Agility',
         source: {
           key: 'Iskaara Tuskarr',
-          value: 'Reputation 10',
+          value: 'Renown 10',
         }
       },
     ],
@@ -102,14 +102,14 @@ const enchanting: INotableRecipe[] = [
         name: 'Plainsrunner\'s Breeze',
         source: {
           key: 'Maruuk Centaur',
-          value: 'Repuation 8',
+          value: 'Renown 8',
         }
       },
       {
         name: 'Watcher\'s Loam',
         source: {
           key: 'Valdrakken Accord',
-          value: 'Repuation 11',
+          value: 'Renown 11',
         }
       },
     ],
@@ -495,12 +495,12 @@ const cooking: INotableRecipe[] = [
 
 export default {
   enchanting,
-  tailoring,
+  jewelcrafting,
   alchemy,
+  cooking,
+  tailoring,
   inscription,
   engineering,
   blacksmithing,
   leatherworking,
-  jewelcrafting,
-  cooking,
 }

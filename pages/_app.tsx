@@ -1,10 +1,13 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
+import { SessionProvider } from 'next-auth/react'
 
-const App = ({ Component, pageProps }: AppProps) => {
+// import SignInButton from 'components/SignInButton'
+
+const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
-    <>
+    <SessionProvider session={session}>
       <nav className='bg-blue-900'>
         <ul className='flex flex-1 justify-end items-center p-4 gap-8'>
           <li>
@@ -13,11 +16,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           <li>
             <Link href='/guild'>Guild Info</Link>
           </li>
-          {/* <li>
-            <Link href='/auction_house'>Auction House</Link>
-          </li>
           <li>
-            <Link href='/login'>Login</Link>
+            <Link href='/professions/raid-ready'>Professions</Link>
+          </li>
+          {/* <li>
+            <SignInButton />
           </li> */}
         </ul>
       </nav>
@@ -37,7 +40,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           LazyPeon Github
         </a>
       </footer>
-    </>
+    </SessionProvider>
   )
 }
 
