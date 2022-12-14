@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import Link from 'next/link'
 import { SessionProvider } from 'next-auth/react'
 
-// import SignInButton from 'components/SignInButton'
+import SignInButton from 'components/SignInButton'
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
@@ -19,13 +19,16 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
           <li>
             <Link href='/professions/raid-ready'>Professions</Link>
           </li>
+          <li>
+            <Link href='/classes'>Class Consumables</Link>
+          </li>
           {/* <li>
             <SignInButton />
           </li> */}
         </ul>
       </nav>
 
-      <main className='min-h-screen p-8'>
+      <main className='p-8' style={{ minHeight: 'calc(100vh - 169px)'}}>
         <Component {...pageProps} />
       </main>
 

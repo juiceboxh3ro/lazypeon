@@ -14,17 +14,17 @@ const enchanting: INotableRecipe[] = [
     type: 'cloak',
     consumable: [
       {
-        name: 'Homebound Speed',
-        source: {
-          key: 'Valdrakken Accord',
-          value: 'Renown 11',
-        },
-      },
-      {
         name: 'Graceful Avoidance',
         source: {
           key: 'Dragonscale Expedition',
           value: 'Renown 9',
+        },
+      },
+      {
+        name: 'Homebound Speed',
+        source: {
+          key: 'Valdrakken Accord',
+          value: 'Renown 11',
         },
       },
       {
@@ -40,7 +40,14 @@ const enchanting: INotableRecipe[] = [
     type: 'chest',
     consumable: [
       {
-        name: 'Waking Stats',
+        name: 'Accelerated Agility',
+        source: {
+          key: 'Iskaara Tuskarr',
+          value: 'Renown 10',
+        }
+      },
+      {
+        name: 'Reserve of Intellect',
         source: {
           key: 'Profession Specialization',
           value: 'Magical Reinforcement',
@@ -54,17 +61,10 @@ const enchanting: INotableRecipe[] = [
         }
       },
       {
-        name: 'Reserve of Intellect',
+        name: 'Waking Stats',
         source: {
           key: 'Profession Specialization',
           value: 'Magical Reinforcement',
-        }
-      },
-      {
-        name: 'Accelerated Agility',
-        source: {
-          key: 'Iskaara Tuskarr',
-          value: 'Renown 10',
         }
       },
     ],
@@ -72,13 +72,6 @@ const enchanting: INotableRecipe[] = [
   {
     type: 'bracers',
     consumable: [
-      {
-        name: 'Devotion of Speed',
-        source: {
-          key: 'Profession Specialization',
-          value: 'Adaptive 20',
-        }
-      },
       {
         name: 'Devotion of Avoidance',
         source: {
@@ -91,6 +84,13 @@ const enchanting: INotableRecipe[] = [
         source: {
           key: 'Profession Specialization',
           value: 'Adaptive 10',
+        }
+      },
+      {
+        name: 'Devotion of Speed',
+        source: {
+          key: 'Profession Specialization',
+          value: 'Adaptive 20',
         }
       },
     ],
@@ -118,14 +118,14 @@ const enchanting: INotableRecipe[] = [
     type: 'ring',
     consumable: [
       {
-        name: 'Devotion of Haste',
+        name: 'Devotion of Critical Strike',
         source: {
           key: 'Profession',
           value: '35',
         }
       },
       {
-        name: 'Devotion of Critical Strike',
+        name: 'Devotion of Haste',
         source: {
           key: 'Profession',
           value: '35',
@@ -151,6 +151,13 @@ const enchanting: INotableRecipe[] = [
     type: 'weapon',
     consumable: [
       {
+        name: 'Frozen Devotion',
+        source: {
+          key: 'Profession Specialization',
+          value: 'Frozen',
+        }
+      },
+      {
         name: 'Sophic Devotion',
         source: {
           key: 'Profession Specialization',
@@ -164,13 +171,6 @@ const enchanting: INotableRecipe[] = [
           value: 'Air',
         }
       },
-      {
-        name: 'Frozen Devotion',
-        source: {
-          key: 'Profession Specialization',
-          value: 'Frozen',
-        }
-      },
     ],
   },
 ]
@@ -180,17 +180,17 @@ const tailoring: INotableRecipe[] = [
     type: 'legs',
     consumable: [
       {
-        name: 'Temporal Spellthread',
-        source: {
-          key: 'Drop',
-          value: '',
-        }
-      },
-      {
         name: 'Frozen Spellthread',
         source: {
           key: 'Cobalt Assembly',
           value: 'High',
+        }
+      },
+      {
+        name: 'Temporal Spellthread',
+        source: {
+          key: 'Drop',
+          value: '',
         }
       },
     ]
@@ -202,19 +202,7 @@ const alchemy: INotableRecipe[] = [
     type: 'potion',
     consumable: [
       {
-        name: 'Elemental Potion of Ultimate Power',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Elemental Potion of Power',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Refreshing Healing Potion',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Potion of Withering Vitality',
+        name: 'Aerated Mana Potion',
         source: { key: '', value: '' },
       },
       {
@@ -222,15 +210,11 @@ const alchemy: INotableRecipe[] = [
         source: { key: '', value: '' },
       },
       {
-        name: 'Residual Neural Channeling Agent',
+        name: 'Elemental Potion of Power',
         source: { key: '', value: '' },
       },
       {
-        name: 'Aerated Mana Potion',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Potion of Frozen Focus',
+        name: 'Elemental Potion of Ultimate Power',
         source: { key: '', value: '' },
       },
       {
@@ -238,7 +222,23 @@ const alchemy: INotableRecipe[] = [
         source: { key: '', value: '' },
       },
       {
+        name: 'Potion of Frozen Focus',
+        source: { key: '', value: '' },
+      },
+      {
         name: 'Potion of the Hushed Zephyr',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Potion of Withering Vitality',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Refreshing Healing Potion',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Residual Neural Channeling Agent',
         source: { key: '', value: '' },
       },
     ],
@@ -247,19 +247,11 @@ const alchemy: INotableRecipe[] = [
     type: 'phial',
     consumable: [
       {
-        name: 'Phial of Elemental Chaos',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Phial of Glacial Fury',
-        source: { key: '', value: '' },
-      },
-      {
         name: 'Iced Phial of Corrupting Rage',
         source: { key: '', value: '' },
       },
       {
-        name: 'Phial of Tepid Versatility',
+        name: 'Phial of Elemental Chaos',
         source: { key: '', value: '' },
       },
       {
@@ -267,7 +259,15 @@ const alchemy: INotableRecipe[] = [
         source: { key: '', value: '' },
       },
       {
+        name: 'Phial of Glacial Fury',
+        source: { key: '', value: '' },
+      },
+      {
         name: 'Phial of Static Empowerment',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Phial of Tepid Versatility',
         source: { key: '', value: '' },
       },
     ],
@@ -279,11 +279,11 @@ const inscription: INotableRecipe[] = [
     type: 'rune',
     consumable: [
       {
-        name: 'Howling Rune',
+        name: 'Buzzing Rune',
         source: { key: '', value: '' },
       },
       {
-        name: 'Buzzing Rune',
+        name: 'Howling Rune',
         source: { key: '', value: '' },
       },
     ]
@@ -316,11 +316,11 @@ const blacksmithing: INotableRecipe[] = [
     type: 'stone',
     consumable: [
       {
-        name: 'Primal Whetstone',
+        name: 'Primal Weightstone',
         source: { key: '', value: '' },
       },
       {
-        name: 'Primal Weightstone',
+        name: 'Primal Whetstone',
         source: { key: '', value: '' },
       },
     ],
@@ -352,15 +352,15 @@ const jewelcrafting: INotableRecipe[] = [
         source: { key: '', value: '' },
       },
       {
-        name: 'Skillful Illimited Diamond',
-        source: { key: '', value: '' },
-      },
-      {
         name: 'Inscribed Illimited Diamond',
         source: { key: '', value: '' },
       },
       {
         name: 'Resplendent Illimited Diamond',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Skillful Illimited Diamond',
         source: { key: '', value: '' },
       },
     ],
@@ -369,7 +369,7 @@ const jewelcrafting: INotableRecipe[] = [
     type: 'rare gem',
     consumable: [
       {
-        name: 'Stormy Malygite',
+        name: 'Energized Malygite',
         source: { key: '', value: '' },
       },
       {
@@ -377,15 +377,11 @@ const jewelcrafting: INotableRecipe[] = [
         source: { key: '', value: '' },
       },
       {
-        name: 'Energized Malygite',
+        name: 'Stormy Malygite',
         source: { key: '', value: '' },
       },
       {
         name: 'Crafty Alexstraszite',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Sensei\'s Alexstraszite',
         source: { key: '', value: '' },
       },
       {
@@ -397,7 +393,11 @@ const jewelcrafting: INotableRecipe[] = [
         source: { key: '', value: '' },
       },
       {
-        name: 'Sensei\'s Neltharite',
+        name: 'Sensei\'s Alexstraszite',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Fractured Neltharite',
         source: { key: '', value: '' },
       },
       {
@@ -405,11 +405,11 @@ const jewelcrafting: INotableRecipe[] = [
         source: { key: '', value: '' },
       },
       {
-        name: 'Zen Neltharite',
+        name: 'Sensei\'s Neltharite',
         source: { key: '', value: '' },
       },
       {
-        name: 'Fractured Neltharite',
+        name: 'Zen Neltharite',
         source: { key: '', value: '' },
       },
       {
@@ -446,19 +446,39 @@ const cooking: INotableRecipe[] = [
     type: 'food',
     consumable: [
       {
-        name: 'Grand Banquet of the Kalu\'ak',
-        source: { key: '', value: '' },
-      },
-      {
         name: 'Fated Fortune Cookie',
         source: { key: '', value: '' },
       },
       {
-        name: 'Sizzling Seafood Medley',
+        name: 'Aromatic Seafood Platter',
         source: { key: '', value: '' },
       },
       {
         name: 'Feisty Fish Sticks',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Grand Banquet of the Kalu\'ak',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Great Cerulean Sea',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Revenge, Served Cold',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Roast Duck Delight',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Seamoth Surprise',
+        source: { key: '', value: '' },
+      },
+      {
+        name: 'Sizzling Seafood Medley',
         source: { key: '', value: '' },
       },
       {
@@ -467,26 +487,6 @@ const cooking: INotableRecipe[] = [
       },
       {
         name: 'Thousandbone Tongueslicer',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Revenge, Served Cold',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Aromatic Seafood Platter',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Seamoth Surprise',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Roast Duck Delight',
-        source: { key: '', value: '' },
-      },
-      {
-        name: 'Great Cerulean Sea',
         source: { key: '', value: '' },
       },
     ],
