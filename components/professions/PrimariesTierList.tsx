@@ -1,5 +1,5 @@
 import { BlizzKeyName, PrimaryProfessionTiers } from 'app'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, Fragment, SetStateAction} from 'react'
 
 interface TierListProps {
   active: string
@@ -31,11 +31,10 @@ const TierList: React.FC<TierListProps> = ({
       <h3 className='text-xl font-bold py-2 mb-4'>{profession.name}</h3>
       <ul className='flex flex-col gap-4'>
         {tiers.map((t: PrimaryProfessionTiers) => (
-          <>
+          <Fragment key={t.tier.id}>
             {t.tier.name.toLowerCase().includes(filter.toLowerCase())
             ? (
               <li
-                key={t.tier.id}
                 className='flex flex-col w-1/2 gap-2 cursor-pointer hover:text-blue-400'
                 onClick={() => handleClick(t.known_recipes, t.tier.name)}
               >
@@ -56,7 +55,7 @@ const TierList: React.FC<TierListProps> = ({
             ) : (
               <></>
             )} 
-          </>
+          </Fragment>
         ))}
       </ul>
     </div>
