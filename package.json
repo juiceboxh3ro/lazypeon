@@ -14,6 +14,7 @@
     "blizzapi": "^2.3.2",
     "mongoose": "^6.8.0",
     "next": "13.0.6",
+    "next-auth": "^4.18.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "zustand": "^4.1.5"
