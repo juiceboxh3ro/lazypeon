@@ -57,8 +57,8 @@ const CharacterProfessionInfo = (props: InferGetServerSidePropsType<typeof getSe
   if (!character?.name) return <ProfileNotFound />
 
   return (
-    <div className="flex flex-1 gap-4 pb-8">
-      <div className="w-1/3">
+    <div className="flex gap-4 pb-8 sm:flex-row sm:flex-wrap lg:flex-nowrap">
+      <div className="sm:w-full md:w-1/3">
         <h2 className='text-2xl mb-4 font-bold'>
           Professions for&nbsp;
             <a
@@ -68,7 +68,7 @@ const CharacterProfessionInfo = (props: InferGetServerSidePropsType<typeof getSe
               className="underline cursor-pointer hover:text-blue-500"
             >{character.name} @ {character.realm.name}</a>
           </h2>
-        <div className="flex gap-2 items-center">
+        <div className="flex flex-wrap gap-2 items-center sm:flex-col md:flex-row">
           <label htmlFor="filter" className="text-lg">Filter by Tier:</label>
           <input
             value={filter}
@@ -110,7 +110,7 @@ const CharacterProfessionInfo = (props: InferGetServerSidePropsType<typeof getSe
         </div>
       </div>
 
-      <div className="w-2/3">
+      <div className="sm:w-full md:w-2/3">
         {tier && (
           <>
             <div className='flex items-center justify-between mb-4'>
