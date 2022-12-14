@@ -22,9 +22,9 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
           <li>
             <Link href='/classes'>Class Consumables</Link>
           </li>
-          <li>
+          {/* <li>
             <SignInButton />
-          </li>
+          </li> */}
         </ul>
       </nav>
 
